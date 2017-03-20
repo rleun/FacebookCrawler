@@ -22,7 +22,7 @@ CREATE (sads:Statistics {	sads: toInteger(line.num_sads)})
 CREATE (angrys:Statistics {	angrys: toInteger(line.num_angrys)})
 
 //Create relationships
-//CREATE (page)-[:Posted]->(post)
+CREATE (page)-[:Posted]->(post)
 
 CREATE (post)-[:Created_On]->(timestamp)
 
