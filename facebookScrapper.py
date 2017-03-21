@@ -4,8 +4,9 @@ import datetime
 import csv
 import time
 
-app_id = "372396713160018"
-app_secret = "0a79efd41c75ea74cc2796adc9257921"
+#User needs to get own app_id & app_secret number from Facebook Developer
+app_id = ""
+app_secret = ""
 page_id = "buzzfeed"
 
 access_token = app_id + "|" + app_secret
@@ -34,8 +35,7 @@ def unicode_normalize(text):
 
 def getFacebookPageFeedData(page_id, access_token, num_statuses):
 
-    # Construct the URL string; see http://stackoverflow.com/a/37239851 for
-    # Reactions parameters
+    # Construct the URL string;
     base = "https://graph.facebook.com/v2.6"
     node = "/%s/posts" % page_id
     fields = "/?fields=message,link,created_time,type,name,id," + \
@@ -51,8 +51,7 @@ def getFacebookPageFeedData(page_id, access_token, num_statuses):
 
 def getReactionsForStatus(status_id, access_token):
 
-    # See http://stackoverflow.com/a/37239851 for Reactions parameters
-        # Reactions are only accessable at a single-post endpoint
+    # Reactions are only accessable at a single-post endpoint
 
     base = "https://graph.facebook.com/v2.6"
     node = "/%s" % status_id
@@ -95,7 +94,7 @@ def processFacebookPageFeedStatus(status, access_token):
     status_published = datetime.datetime.strptime(
             status['created_time'],'%Y-%m-%dT%H:%M:%S+0000')
     status_published = status_published + \
-            datetime.timedelta(hours=-5) # EST
+            datetime.timedelta(hours=-5)
     status_published = status_published.strftime(
             '%Y-%m-%d %H:%M:%S') # best time format for spreadsheet programs
 
@@ -108,8 +107,7 @@ def processFacebookPageFeedStatus(status, access_token):
     num_shares = 0 if 'shares' not in status else status['shares']['count']
 
     # Counts of each reaction separately; good for sentiment
-    # Only check for reactions if past date of implementation:
-    # http://newsroom.fb.com/news/2016/02/reactions-now-available-globally/
+    # Only check for reactions if past date of implementation
 
     reactions = getReactionsForStatus(status_id, access_token) if \
             status_published > '2016-02-24 00:00:00' else {}

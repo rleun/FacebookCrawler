@@ -1,7 +1,7 @@
 //Load CSV
 USING PERIODIC COMMIT 100
 LOAD CSV WITH HEADERS FROM "file:///C:/10kPosts.csv" AS line
-WITH line LIMIT 1000
+//WITH line LIMIT 1000
 
 
 //Create Page Node
